@@ -1,0 +1,16 @@
+(trajectory
+(:objects container-0-0 - storearea container0 - container crate0 - crate depot0 - depot depot0-1-1 - storearea depot0-1-2 - storearea hoist0 - hoist hoist1 - hoist loadarea - transitarea)
+(:init (at hoist0 depot0-1-1) (at hoist1 depot0-1-2) (available hoist0) (available hoist1) (connected container-0-0 loadarea) (connected depot0-1-1 depot0-1-2) (connected depot0-1-1 loadarea) (connected depot0-1-2 depot0-1-1) (connected loadarea container-0-0) (connected loadarea depot0-1-1) (in container-0-0 container0) (in crate0 container0) (in depot0-1-1 depot0) (in depot0-1-2 depot0) (on crate0 container-0-0))
+
+(operator: (go-out hoist0 depot0-1-1 loadarea))
+
+(:state (at hoist0 depot0-1-1) (at hoist1 depot0-1-2) (available hoist0) (available hoist1) (connected container-0-0 loadarea) (connected depot0-1-1 depot0-1-2) (connected depot0-1-1 loadarea) (connected depot0-1-2 depot0-1-1) (connected loadarea container-0-0) (connected loadarea depot0-1-1) (in container-0-0 container0) (in crate0 container0) (in depot0-1-1 depot0) (in depot0-1-2 depot0) (on crate0 container-0-0))
+
+(operator: (lift hoist0 crate0 container-0-0 loadarea container0))
+
+(:state (at hoist0 depot0-1-1) (at hoist1 depot0-1-2) (available hoist0) (available hoist1) (connected container-0-0 loadarea) (connected depot0-1-1 depot0-1-2) (connected depot0-1-1 loadarea) (connected depot0-1-2 depot0-1-1) (connected loadarea container-0-0) (connected loadarea depot0-1-1) (in container-0-0 container0) (in crate0 container0) (in depot0-1-1 depot0) (in depot0-1-2 depot0) (on crate0 container-0-0))
+
+(operator: (drop hoist0 crate0 depot0-1-1 loadarea depot0))
+
+(:state (at hoist0 depot0-1-1) (at hoist1 depot0-1-2) (available hoist0) (available hoist1) (connected container-0-0 loadarea) (connected depot0-1-1 depot0-1-2) (connected depot0-1-1 loadarea) (connected depot0-1-2 depot0-1-1) (connected loadarea container-0-0) (connected loadarea depot0-1-1) (in container-0-0 container0) (in crate0 container0) (in depot0-1-1 depot0) (in depot0-1-2 depot0) (on crate0 container-0-0))
+)

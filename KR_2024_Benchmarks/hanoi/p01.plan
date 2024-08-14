@@ -1,0 +1,8 @@
+(move peg3 d1 d2)
+(move peg2 d2 d3)
+(move d2 d1 peg3)
+(move peg3 d3 peg1)
+(move peg1 d1 d2)
+(move d3 d2 peg2)
+(move d2 d1 peg1)
+; cost = 7 (unit cost)

@@ -1,0 +1,111 @@
+(define (domain scanalyzer3d)
+(:requirements :strips :typing :negative-preconditions)
+  (:types
+    segment - object
+    car - object
+  )
+
+  (:predicates
+    (cycle-2 ?s1 - segment ?s2 - segment)
+    (cycle-2-with-analysis ?s1 - segment ?s2 - segment)
+    (cycle-4 ?s1 - segment ?s2 - segment ?s3 - segment ?s4 - segment)
+    (cycle-4-with-analysis ?s1 - segment ?s2 - segment ?s3 - segment ?s4 - segment)
+    (analyzed ?c - car)
+    (on ?c - car ?s - segment)
+  )
+  (:action analyze-4
+    :parameters (?car1 - car ?car2 - car ?car3 - car ?car4 - car ?segment1 - segment ?segment2 - segment ?segment3 - segment ?segment4 - segment)
+    :precondition (and
+      (cycle-4 ?segment3 ?segment2 ?segment1 ?segment4)
+      (cycle-4-with-analysis ?segment3 ?segment2 ?segment1 ?segment4)
+      (not(analyzed ?car4))
+      (not(on ?car1 ?segment1))
+      (not(on ?car2 ?segment2))
+      (not(on ?car3 ?segment3))
+      (not(on ?car4 ?segment4))
+      (on ?car1 ?segment4)
+      (on ?car2 ?segment1)
+      (on ?car3 ?segment2)
+      (on ?car4 ?segment3)
+    )
+    :effect (and
+      (analyzed ?car4)
+      (not(on ?car1 ?segment4))
+      (not(on ?car2 ?segment1))
+      (not(on ?car3 ?segment2))
+      (not(on ?car4 ?segment3))
+      (on ?car1 ?segment1)
+      (on ?car2 ?segment2)
+      (on ?car3 ?segment3)
+      (on ?car4 ?segment4)
+    )
+  )
+
+  (:action rotate-4
+    :parameters (?car1 - car ?car2 - car ?car3 - car ?car4 - car ?segment1 - segment ?segment2 - segment ?segment3 - segment ?segment4 - segment)
+    :precondition (and
+      (analyzed ?car1)
+      (analyzed ?car2)
+      (analyzed ?car3)
+      (analyzed ?car4)
+      (cycle-4 ?segment4 ?segment2 ?segment3 ?segment1)
+      (cycle-4-with-analysis ?segment4 ?segment2 ?segment3 ?segment1)
+      (not(on ?car1 ?segment1))
+      (not(on ?car2 ?segment3))
+      (not(on ?car3 ?segment2))
+      (not(on ?car4 ?segment4))
+      (on ?car1 ?segment4)
+      (on ?car2 ?segment1)
+      (on ?car3 ?segment3)
+      (on ?car4 ?segment2)
+    )
+    :effect (and
+      (not(on ?car1 ?segment4))
+      (not(on ?car2 ?segment1))
+      (not(on ?car3 ?segment3))
+      (not(on ?car4 ?segment2))
+      (on ?car1 ?segment1)
+      (on ?car2 ?segment3)
+      (on ?car3 ?segment2)
+      (on ?car4 ?segment4)
+    )
+  )
+
+  (:action analyze-2
+    :parameters (?car1 - car ?car2 - car ?segment1 - segment ?segment2 - segment)
+    :precondition (and
+      (cycle-2 ?segment1 ?segment2)
+      (cycle-2-with-analysis ?segment1 ?segment2)
+      (not(analyzed ?car2))
+      (not(on ?car1 ?segment1))
+      (not(on ?car2 ?segment2))
+      (on ?car1 ?segment2)
+      (on ?car2 ?segment1)
+    )
+    :effect (and
+      (analyzed ?car2)
+      (not(on ?car1 ?segment2))
+      (not(on ?car2 ?segment1))
+      (on ?car1 ?segment1)
+      (on ?car2 ?segment2)
+    )
+  )
+
+  (:action rotate-2
+    :parameters (?car1 - car ?car2 - car ?segment1 - segment ?segment2 - segment ?segment3 - segment ?segment4 - segment)
+    :precondition (and
+      (cycle-2 ?segment2 ?segment1)
+      (not(on ?car1 ?segment4))
+      (not(on ?car2 ?segment3))
+      (on ?car1 ?segment3)
+      (on ?car2 ?segment4)
+    )
+    :effect (and
+      (not(on ?car1 ?segment3))
+      (not(on ?car2 ?segment4))
+      (on ?car1 ?segment4)
+      (on ?car2 ?segment3)
+    )
+  )
+
+)

@@ -1,0 +1,5 @@
+Peg solitaire, Solo Noble or simply Solitaire is a board game for one player involving movement of pegs on a board with holes.
+Some sets use marbles in a board with indentations.
+A valid move is to jump a peg orthogonally over an adjacent peg into a hole two positions away and then to remove the jumped peg.
+The standard game fills the entire board with pegs except for the central hole.
+The objective is, making valid moves, to empty the entire board except for a solitary peg in the central hole.

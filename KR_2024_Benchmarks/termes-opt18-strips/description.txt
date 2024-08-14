@@ -1,0 +1,3 @@
+This domain models the Harvard TERMES robots, based on termites. They cannot only carry blocks but also climb on them so that
+they can build complex structures. This domain, in its full generality, is a multi-agent planning benchmark,
+but here we model only a single robot.

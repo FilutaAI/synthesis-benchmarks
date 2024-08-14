@@ -1,0 +1,6 @@
+This is a relatively recent planning domain that has been investigating in operation research (OR) for several years.
+The travelling purchase problem (TPP) is a known generalization of the travelling salesman problem, and is defined as follows.
+We have a set of products and a set of markets. Each market is provided with a limited amount of each product at a known price.
+The TPP consists in selecting a subset of markets such that a given demand of each product can be purchased, minimizing the
+routing cost and the purchasing cost. This problem arises in several applications, mainly in routing and scheduling contexts,
+and it is NP-hard. In OR, computing optimal or near optimal solutions for TPP instances is still an active research topic.

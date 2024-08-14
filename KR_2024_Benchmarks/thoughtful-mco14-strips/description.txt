@@ -1,0 +1,10 @@
+Thoughtful Solitaire is an easy-to-play variation of the popular solitaire game, Klondike (a.k.a. Patience).
+It’s just like the original, but with one interesting revision: instead of starting the game with cards faced down,
+they are turned up and clearly visible to the player. This makes it possible to know the exact location of each card during the game.
+As a result, the player can more easily plan better plays to win more games.
+The goal of Thoughtful Solitaire is to move each card, in ascending rank, to its respective card foundation.
+Initially, all cards except the topmost one will be obscured in each row.
+The player may drag a card of a particular suit color and rank underneath another card that is one rank greater
+and of the opposite color to form a stack. Kings can only be moved to an empty spot on the board.
+Stacks may also be moved around similarly. The player can also draw cards from the stock to assist in building stacks
+or completing the foundations. The player wins the game when all 52 cards have been moved into the foundations in the correct order.

@@ -1,0 +1,4 @@
+This domain models the problem of automatic greenhouse logistic management.
+The objective is to transport plants through the imaging chamber
+and then return them to their original segments.
+The plants are transported by conveyor belts that only travel in one direction.

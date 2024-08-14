@@ -1,0 +1,6 @@
+There are 3 pegs (A,B,C) and a tower of disks on the first one
+(A), with the smaller on the top and the bigger on the bottom.
+The purpose of the puzzle is to move the whole tower from the
+first peg (A) to the third (C), by moving only one disk every
+time and by observing not to put a bigger disk atop of a smaller
+one.

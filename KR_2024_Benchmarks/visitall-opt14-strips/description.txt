@@ -1,0 +1,1 @@
+In the visit all domain an agent in the middle of a square grid must visit all the cells in the grid.

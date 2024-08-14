@@ -1,0 +1,4 @@
+No mystery is a transportation domain designed to study resource constrained planning.
+In this domain, a truck moves in a weighted graph; a set of packages must be transported between nodes;
+actions move along edges, and load/unload packages; each move consumes the edge weight in fuel.
+In brief, no mystery is a straightforward problem similar to the ones contained in many IPC benchmarks.

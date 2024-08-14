@@ -1,0 +1,32 @@
+(trajectory
+(:objects d1 - disc d2 - disc d3 - disc peg1 - disc peg2 - disc peg3 - disc)
+(:init (clear d1) (clear peg2) (clear peg3) (on d1 d2) (on d2 d3) (on d3 peg1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3))
+
+(operator: (move peg3 d1 d2))
+
+(:state (clear d1) (clear peg2) (on d2 d3) (on d3 peg1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (clear d2) (on d1 peg3))
+
+(operator: (move peg2 d2 d3))
+
+(:state (clear d1) (on d3 peg1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (clear d2) (on d1 peg3) (clear d3) (on d2 peg2))
+
+(operator: (move d2 d1 peg3))
+
+(:state (clear d1) (on d3 peg1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (clear d3) (on d2 peg2) (clear peg3) (on d1 d2))
+
+(operator: (move peg3 d3 peg1))
+
+(:state (clear d1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (clear d3) (on d2 peg2) (on d1 d2) (clear peg1) (on d3 peg3))
+
+(operator: (move peg1 d1 d2))
+
+(:state (clear d1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (clear d3) (on d2 peg2) (on d3 peg3) (clear d2) (on d1 peg1))
+
+(operator: (move d3 d2 peg2))
+
+(:state (clear d1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (on d3 peg3) (clear d2) (on d1 peg1) (clear peg2) (on d2 d3))
+
+(operator: (move d2 d1 peg1))
+
+(:state (clear d1) (smaller d1 d2) (smaller d1 d3) (smaller d1 peg1) (smaller d1 peg2) (smaller d1 peg3) (smaller d2 d3) (smaller d2 peg1) (smaller d2 peg2) (smaller d2 peg3) (smaller d3 peg1) (smaller d3 peg2) (smaller d3 peg3) (on d3 peg3) (clear peg2) (on d2 d3) (clear peg1) (on d1 d2))
+)

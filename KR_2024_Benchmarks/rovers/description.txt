@@ -1,0 +1,3 @@
+Inspired by planetary rovers problems, this domain requires that a collection of rovers navigate a planet surface,
+finding samples, taking images, and collecting them back to a lander.
+In this version, rovers can carry one sample at a time. They must drop them at a safe location before they can take the next one.

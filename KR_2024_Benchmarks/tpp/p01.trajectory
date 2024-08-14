@@ -1,0 +1,24 @@
+(trajectory
+(:objects depot1 - depot goods1 - goods level0 - level level1 - level market1 - market truck1 - truck)
+(:init (at truck1 depot1) (connected depot1 market1) (connected market1 depot1) (loaded goods1 truck1 level0) (next level1 level0) (on-sale goods1 market1 level1) (ready-to-load goods1 market1 level0) (stored goods1 level0))
+
+(operator: (drive truck1 depot1 market1))
+
+(:state (connected depot1 market1) (connected market1 depot1) (loaded goods1 truck1 level0) (next level1 level0) (on-sale goods1 market1 level1) (ready-to-load goods1 market1 level0) (stored goods1 level0) (at truck1 market1))
+
+(operator: (buy truck1 goods1 market1 level0 level1 level0 level1))
+
+(:state (connected depot1 market1) (connected market1 depot1) (loaded goods1 truck1 level0) (next level1 level0) (stored goods1 level0) (at truck1 market1) (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level1))
+
+(operator: (load goods1 truck1 market1 level0 level1 level0 level1))
+
+(:state (connected depot1 market1) (connected market1 depot1) (next level1 level0) (stored goods1 level0) (at truck1 market1) (on-sale goods1 market1 level0) (loaded goods1 truck1 level1) (ready-to-load goods1 market1 level0))
+
+(operator: (drive truck1 market1 depot1))
+
+(:state (connected depot1 market1) (connected market1 depot1) (next level1 level0) (stored goods1 level0) (on-sale goods1 market1 level0) (loaded goods1 truck1 level1) (ready-to-load goods1 market1 level0) (at truck1 depot1))
+
+(operator: (unload goods1 truck1 depot1 level0 level1 level0 level1))
+
+(:state (connected depot1 market1) (connected market1 depot1) (next level1 level0) (on-sale goods1 market1 level0) (ready-to-load goods1 market1 level0) (at truck1 depot1) (loaded goods1 truck1 level0) (stored goods1 level1))
+)
