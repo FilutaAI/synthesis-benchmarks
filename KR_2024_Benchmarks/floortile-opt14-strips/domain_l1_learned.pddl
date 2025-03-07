@@ -1,5 +1,5 @@
 (define (domain floor-tile)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     robot - object
     tile - object
@@ -18,29 +18,13 @@
     (robot-has ?r - robot ?c - color)
     (up ?x - tile ?y - tile)
   )
-  (:action change-color
-    :parameters (?color1 - color ?color2 - color ?robot1 - robot)
-    :precondition (and
-      (available-color ?color1)
-      (available-color ?color2)
-      (not(robot-has ?robot1 ?color1))
-      (robot-has ?robot1 ?color2)
-    )
-    :effect (and
-      (not(robot-has ?robot1 ?color2))
-      (robot-has ?robot1 ?color1)
-    )
-  )
-
-  (:action up
+  (:action down
     :parameters (?robot1 - robot ?tile1 - tile ?tile2 - tile)
     :precondition (and
       (clear ?tile1)
-      (down ?tile2 ?tile1)
-      (not(clear ?tile2))
-      (not(robot-at ?robot1 ?tile1))
+      (down ?tile1 ?tile2)
       (robot-at ?robot1 ?tile2)
-      (up ?tile1 ?tile2)
+      (up ?tile2 ?tile1)
     )
     :effect (and
       (clear ?tile2)
@@ -50,30 +34,11 @@
     )
   )
 
-  (:action paint-up
-    :parameters (?color1 - color ?robot1 - robot ?tile1 - tile ?tile2 - tile)
-    :precondition (and
-      (available-color ?color1)
-      (clear ?tile2)
-      (down ?tile1 ?tile2)
-      (not(painted ?tile2 ?color1))
-      (robot-at ?robot1 ?tile1)
-      (robot-has ?robot1 ?color1)
-      (up ?tile2 ?tile1)
-    )
-    :effect (and
-      (not(clear ?tile2))
-      (painted ?tile2 ?color1)
-    )
-  )
-
   (:action left
     :parameters (?robot1 - robot ?tile1 - tile ?tile2 - tile)
     :precondition (and
       (clear ?tile1)
       (left ?tile1 ?tile2)
-      (not(clear ?tile2))
-      (not(robot-at ?robot1 ?tile1))
       (right ?tile2 ?tile1)
       (robot-at ?robot1 ?tile2)
     )
@@ -85,15 +50,13 @@
     )
   )
 
-  (:action down
+  (:action up
     :parameters (?robot1 - robot ?tile1 - tile ?tile2 - tile)
     :precondition (and
       (clear ?tile1)
-      (down ?tile1 ?tile2)
-      (not(clear ?tile2))
-      (not(robot-at ?robot1 ?tile1))
+      (down ?tile2 ?tile1)
       (robot-at ?robot1 ?tile2)
-      (up ?tile2 ?tile1)
+      (up ?tile1 ?tile2)
     )
     :effect (and
       (clear ?tile2)
@@ -103,13 +66,24 @@
     )
   )
 
+  (:action change-color
+    :parameters (?color1 - color ?color2 - color ?robot1 - robot)
+    :precondition (and
+      (available-color ?color1)
+      (available-color ?color2)
+      (robot-has ?robot1 ?color2)
+    )
+    :effect (and
+      (not(robot-has ?robot1 ?color2))
+      (robot-has ?robot1 ?color1)
+    )
+  )
+
   (:action right
     :parameters (?robot1 - robot ?tile1 - tile ?tile2 - tile)
     :precondition (and
       (clear ?tile1)
       (left ?tile2 ?tile1)
-      (not(clear ?tile2))
-      (not(robot-at ?robot1 ?tile1))
       (right ?tile1 ?tile2)
       (robot-at ?robot1 ?tile2)
     )
@@ -118,6 +92,18 @@
       (not(clear ?tile1))
       (not(robot-at ?robot1 ?tile2))
       (robot-at ?robot1 ?tile1)
+    )
+  )
+
+  (:action paint-up
+    :parameters (?color1 - color ?tile1 - tile)
+    :precondition (and
+      (available-color ?color1)
+      (clear ?tile1)
+    )
+    :effect (and
+      (not(clear ?tile1))
+      (painted ?tile1 ?color1)
     )
   )
 

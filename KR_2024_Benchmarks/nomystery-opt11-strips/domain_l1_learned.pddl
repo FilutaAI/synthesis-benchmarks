@@ -1,5 +1,5 @@
 (define (domain transport-strips)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     location - object
     fuellevel - object
@@ -17,18 +17,12 @@
     (sum ?a - fuellevel ?b - fuellevel ?c - fuellevel)
   )
   (:action drive
-    :parameters (?fuellevel1 - fuellevel ?fuellevel2 - fuellevel ?fuellevel3 - fuellevel ?location1 - location ?location2 - location ?truck1 - truck)
+    :parameters (?fuellevel1 - fuellevel ?fuellevel2 - fuellevel ?location1 - location ?location2 - location ?truck1 - truck)
     :precondition (and
       (at ?truck1 ?location2)
       (connected ?location1 ?location2)
       (connected ?location2 ?location1)
       (fuel ?truck1 ?fuellevel2)
-      (fuelcost ?fuellevel3 ?location1 ?location2)
-      (fuelcost ?fuellevel3 ?location2 ?location1)
-      (not(at ?truck1 ?location1))
-      (not(fuel ?truck1 ?fuellevel1))
-      (sum ?fuellevel1 ?fuellevel3 ?fuellevel2)
-      (sum ?fuellevel3 ?fuellevel1 ?fuellevel2)
     )
     :effect (and
       (at ?truck1 ?location1)
@@ -43,7 +37,6 @@
     :precondition (and
       (at ?package1 ?location1)
       (at ?truck1 ?location1)
-      (not(in ?package1 ?truck1))
     )
     :effect (and
       (in ?package1 ?truck1)
@@ -56,7 +49,6 @@
     :precondition (and
       (at ?truck1 ?location1)
       (in ?package1 ?truck1)
-      (not(at ?package1 ?location1))
     )
     :effect (and
       (at ?package1 ?location1)

@@ -1,5 +1,5 @@
 (define (domain hanoi-domain)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     disc - object
   )
@@ -14,8 +14,6 @@
     :precondition (and
       (clear ?disc2)
       (clear ?disc3)
-      (not(clear ?disc1))
-      (not(on ?disc3 ?disc2))
       (on ?disc3 ?disc1)
       (smaller ?disc3 ?disc1)
       (smaller ?disc3 ?disc2)

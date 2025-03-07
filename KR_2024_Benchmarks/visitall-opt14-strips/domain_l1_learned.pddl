@@ -1,5 +1,5 @@
 (define (domain grid-visit-all)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     place - object
   )
@@ -15,7 +15,6 @@
       (at-robot ?place2)
       (connected ?place1 ?place2)
       (connected ?place2 ?place1)
-      (not(at-robot ?place1))
       (visited ?place2)
     )
     :effect (and

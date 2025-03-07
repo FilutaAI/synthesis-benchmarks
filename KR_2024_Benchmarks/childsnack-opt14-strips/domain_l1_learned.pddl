@@ -1,5 +1,5 @@
 (define (domain child-snack)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     child - object
     bread-portion - object
@@ -27,23 +27,14 @@
     (served ?c - child)
     (waiting ?c - child ?p - place)
   )
-  (:action make_sandwich_no_gluten
-    :parameters (?bread-portion1 - bread-portion ?content-portion1 - content-portion ?sandwich1 - sandwich)
+  (:action move_tray
+    :parameters (?place1 - place ?place2 - place ?tray1 - tray)
     :precondition (and
-      (at_kitchen_bread ?bread-portion1)
-      (at_kitchen_content ?content-portion1)
-      (no_gluten_bread ?bread-portion1)
-      (no_gluten_content ?content-portion1)
-      (not(at_kitchen_sandwich ?sandwich1))
-      (not(no_gluten_sandwich ?sandwich1))
-      (notexist ?sandwich1)
+      (at ?tray1 ?place2)
     )
     :effect (and
-      (at_kitchen_sandwich ?sandwich1)
-      (no_gluten_sandwich ?sandwich1)
-      (not(at_kitchen_bread ?bread-portion1))
-      (not(at_kitchen_content ?content-portion1))
-      (not(notexist ?sandwich1))
+      (at ?tray1 ?place1)
+      (not(at ?tray1 ?place2))
     )
   )
 
@@ -52,7 +43,6 @@
     :precondition (and
       (at ?tray1 kitchen)
       (at_kitchen_sandwich ?sandwich1)
-      (not(ontray ?sandwich1 ?tray1))
     )
     :effect (and
       (not(at_kitchen_sandwich ?sandwich1))
@@ -60,27 +50,11 @@
     )
   )
 
-  (:action move_tray
-    :parameters (?place1 - place ?place2 - place ?tray1 - tray)
+  (:action serve_sandwich
+    :parameters (?child1 - child ?sandwich1 - sandwich ?tray1 - tray)
     :precondition (and
-      (at ?tray1 ?place2)
-      (not(at ?tray1 ?place1))
-    )
-    :effect (and
-      (at ?tray1 ?place1)
-      (not(at ?tray1 ?place2))
-    )
-  )
-
-  (:action serve_sandwich_no_gluten
-    :parameters (?child1 - child ?place1 - place ?sandwich1 - sandwich ?tray1 - tray)
-    :precondition (and
-      (allergic_gluten ?child1)
-      (at ?tray1 ?place1)
-      (no_gluten_sandwich ?sandwich1)
-      (not(served ?child1))
+      (not_allergic_gluten ?child1)
       (ontray ?sandwich1 ?tray1)
-      (waiting ?child1 ?place1)
     )
     :effect (and
       (not(ontray ?sandwich1 ?tray1))
@@ -93,7 +67,6 @@
     :precondition (and
       (at_kitchen_bread ?bread-portion1)
       (at_kitchen_content ?content-portion1)
-      (not(at_kitchen_sandwich ?sandwich1))
       (notexist ?sandwich1)
     )
     :effect (and
@@ -104,14 +77,30 @@
     )
   )
 
-  (:action serve_sandwich
-    :parameters (?child1 - child ?place1 - place ?sandwich1 - sandwich ?tray1 - tray)
+  (:action make_sandwich_no_gluten
+    :parameters (?bread-portion1 - bread-portion ?content-portion1 - content-portion ?sandwich1 - sandwich)
     :precondition (and
-      (at ?tray1 ?place1)
-      (not(served ?child1))
-      (not_allergic_gluten ?child1)
+      (at_kitchen_bread ?bread-portion1)
+      (at_kitchen_content ?content-portion1)
+      (no_gluten_bread ?bread-portion1)
+      (no_gluten_content ?content-portion1)
+      (notexist ?sandwich1)
+    )
+    :effect (and
+      (at_kitchen_sandwich ?sandwich1)
+      (no_gluten_sandwich ?sandwich1)
+      (not(at_kitchen_bread ?bread-portion1))
+      (not(at_kitchen_content ?content-portion1))
+      (not(notexist ?sandwich1))
+    )
+  )
+
+  (:action serve_sandwich_no_gluten
+    :parameters (?child1 - child ?sandwich1 - sandwich ?tray1 - tray)
+    :precondition (and
+      (allergic_gluten ?child1)
+      (no_gluten_sandwich ?sandwich1)
       (ontray ?sandwich1 ?tray1)
-      (waiting ?child1 ?place1)
     )
     :effect (and
       (not(ontray ?sandwich1 ?tray1))

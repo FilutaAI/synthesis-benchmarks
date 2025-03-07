@@ -1,5 +1,5 @@
 (define (domain Storage-Propositional)
-(:requirements :strips :typing :negative-preconditions)
+(:requirements :strips :typing :negative-preconditions :equality)
   (:types
     hoist - object
     surface - object
@@ -22,64 +22,18 @@
     (lifting ?h - hoist ?c - crate)
     (on ?c - crate ?s - storearea)
   )
-  (:action go-out
+  (:action go-in
     :parameters (?hoist1 - hoist ?storearea1 - storearea ?transitarea1 - transitarea)
     :precondition (and
-      (at ?hoist1 ?storearea1)
-      (available ?hoist1)
+      (at ?hoist1 ?transitarea1)
+      (clear ?storearea1)
       (connected ?storearea1 ?transitarea1)
       (connected ?transitarea1 ?storearea1)
+    )
+    :effect (and
+      (at ?hoist1 ?storearea1)
       (not(at ?hoist1 ?transitarea1))
       (not(clear ?storearea1))
-    )
-    :effect (and
-      (at ?hoist1 ?transitarea1)
-      (clear ?storearea1)
-      (not(at ?hoist1 ?storearea1))
-    )
-  )
-
-  (:action lift
-    :parameters (?container1 - container ?crate1 - crate ?hoist1 - hoist ?storearea1 - storearea ?transitarea1 - transitarea)
-    :precondition (and
-      (at ?hoist1 ?transitarea1)
-      (available ?hoist1)
-      (connected ?storearea1 ?transitarea1)
-      (connected ?transitarea1 ?storearea1)
-      (in ?crate1 ?container1)
-      (in ?storearea1 ?container1)
-      (not(clear ?storearea1))
-      (not(lifting ?hoist1 ?crate1))
-      (on ?crate1 ?storearea1)
-    )
-    :effect (and
-      (clear ?storearea1)
-      (lifting ?hoist1 ?crate1)
-      (not(available ?hoist1))
-      (not(in ?crate1 ?container1))
-      (not(on ?crate1 ?storearea1))
-    )
-  )
-
-  (:action drop
-    :parameters (?area1 - area ?crate1 - crate ?depot1 - depot ?hoist1 - hoist ?storearea1 - storearea)
-    :precondition (and
-      (at ?hoist1 ?area1)
-      (clear ?storearea1)
-      (connected ?area1 ?storearea1)
-      (connected ?storearea1 ?area1)
-      (in ?storearea1 ?depot1)
-      (lifting ?hoist1 ?crate1)
-      (not(available ?hoist1))
-      (not(in ?crate1 ?depot1))
-      (not(on ?crate1 ?storearea1))
-    )
-    :effect (and
-      (available ?hoist1)
-      (in ?crate1 ?depot1)
-      (not(clear ?storearea1))
-      (not(lifting ?hoist1 ?crate1))
-      (on ?crate1 ?storearea1)
     )
   )
 
@@ -91,8 +45,6 @@
       (clear ?storearea1)
       (connected ?storearea1 ?storearea2)
       (connected ?storearea2 ?storearea1)
-      (not(at ?hoist1 ?storearea1))
-      (not(clear ?storearea2))
     )
     :effect (and
       (at ?hoist1 ?storearea1)
@@ -102,19 +54,51 @@
     )
   )
 
-  (:action go-in
+  (:action go-out
     :parameters (?hoist1 - hoist ?storearea1 - storearea ?transitarea1 - transitarea)
     :precondition (and
-      (at ?hoist1 ?transitarea1)
-      (clear ?storearea1)
+      (at ?hoist1 ?storearea1)
+      (available ?hoist1)
       (connected ?storearea1 ?transitarea1)
       (connected ?transitarea1 ?storearea1)
-      (not(at ?hoist1 ?storearea1))
     )
     :effect (and
-      (at ?hoist1 ?storearea1)
-      (not(at ?hoist1 ?transitarea1))
+      (at ?hoist1 ?transitarea1)
+      (clear ?storearea1)
+      (not(at ?hoist1 ?storearea1))
+    )
+  )
+
+  (:action drop
+    :parameters (?crate1 - crate ?depot1 - depot ?hoist1 - hoist ?storearea1 - storearea)
+    :precondition (and
+      (clear ?storearea1)
+      (in ?storearea1 ?depot1)
+      (lifting ?hoist1 ?crate1)
+    )
+    :effect (and
+      (available ?hoist1)
+      (in ?crate1 ?depot1)
       (not(clear ?storearea1))
+      (not(lifting ?hoist1 ?crate1))
+      (on ?crate1 ?storearea1)
+    )
+  )
+
+  (:action lift
+    :parameters (?container1 - container ?crate1 - crate ?hoist1 - hoist ?storearea1 - storearea)
+    :precondition (and
+      (available ?hoist1)
+      (in ?crate1 ?container1)
+      (in ?storearea1 ?container1)
+      (on ?crate1 ?storearea1)
+    )
+    :effect (and
+      (clear ?storearea1)
+      (lifting ?hoist1 ?crate1)
+      (not(available ?hoist1))
+      (not(in ?crate1 ?container1))
+      (not(on ?crate1 ?storearea1))
     )
   )
 
